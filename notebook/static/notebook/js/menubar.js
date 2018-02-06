@@ -86,7 +86,6 @@ define([
                     // Validate menu item metadata
                     if(!group.length) {
                         console.warn('unknown group', bundler.group, 'for bundler ID', bundler_id, '; skipping');
-                        return;
                     } else if(!bundler.label) {
                         console.warn('no label for bundler ID', bundler_id, '; skipping');
                         return;

@@ -2308,6 +2308,16 @@ define([
         return this._restart_kernel(restart_options);
     };
 
+    Notebook.prototype.close_and_halt = function () {
+        var close_window = function () {
+        // allow closing of new tabs in Chromium, impossible in FF
+            window.open('', '_self', '');
+            window.close();
+        };
+        // finish with close on success or failure
+        this.session.delete(close_window, close_window);
+    };
+
     /**
      * Prompt the user to restart the kernel.
      * if options.confirm === false, no confirmation dialog is shown.
@@ -2352,7 +2362,7 @@ define([
         };
         return this._restart_kernel(restart_options);
     };
-    
+
     // inner implementation of restart dialog & promise
     Notebook.prototype._restart_kernel = function (options) {
         var that = this;
@@ -2362,7 +2372,7 @@ define([
             resolve_promise = resolve;
             reject_promise = reject;
         });
-        
+
         function restart_and_resolve () {
             that.kernel.restart(function () {
                 // resolve when the kernel is *ready* not just started

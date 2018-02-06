@@ -64,12 +64,20 @@ define([
      *  but is considered undefined behavior.
      *
      **/
+
     var _actions = {
         'toggle-rtl-layout': {
             cmd: i18n.msg._('toggle rtl layout'),
             help: i18n.msg._('Toggle the screen directionality between left-to-right and right-to-left'),
             handler: function () {
               (document.body.getAttribute('dir')=='rtl') ? document.body.setAttribute('dir','ltr') : document.body.setAttribute('dir','rtl');
+            }
+        },
+        'close-and-halt': {
+            cmd: i18n.msg._('close and halt notebook kernel'),
+            help: i18n.msg._("some help message"),
+            handler: function (env) {
+                env.notebook.close_and_halt();
             }
         },
         'edit-command-mode-keyboard-shortcuts': {
